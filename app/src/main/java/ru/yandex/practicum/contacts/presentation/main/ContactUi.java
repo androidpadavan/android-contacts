@@ -6,7 +6,6 @@ import java.util.List;
 
 import ru.yandex.practicum.contacts.model.ContactType;
 import ru.yandex.practicum.contacts.presentation.base.ListDiffInterface;
-import ru.yandex.practicum.contacts.presentation.sort.SortTypeUI;
 
 public class ContactUi implements ListDiffInterface<ContactUi>  {
 
@@ -46,11 +45,6 @@ public class ContactUi implements ListDiffInterface<ContactUi>  {
     @Override
     public boolean theSameAs(ContactUi other) {
         return this.hashCode() == other.hashCode();
-    }
-
-    @Override
-    public boolean theSameAs(SortTypeUI other) {
-        return false;
     }
 
     @Override
