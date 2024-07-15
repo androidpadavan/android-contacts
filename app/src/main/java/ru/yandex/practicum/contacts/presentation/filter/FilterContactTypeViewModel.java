@@ -63,12 +63,15 @@ public class FilterContactTypeViewModel extends BaseBottomSheetViewModel {
     private void updateFilterContactTypes() {
         final List<FilterContactTypeUi> filterContactTypesUi = new ArrayList<>();
         final boolean allSelected = selectedFilterContactTypes.size() == ContactType.values().length;
-        filterContactTypesUi.add(new FilterContactTypeUi(FilterContactType.ALL, allSelected));
+        filterContactTypesUi.add(new FilterContactTypeUi(FilterContactType.ALL, allSelected) {
+
+        });
         final List<FilterContactTypeUi> collect = Arrays.stream(ContactType.values())
                 .map(contactType -> new FilterContactTypeUi(
                         ContactTypeUtils.toFilterContactType(contactType),
                         selectedFilterContactTypes.contains(contactType)
-                ))
+                ) {
+                })
                 .collect(Collectors.toList());
         filterContactTypesUi.addAll(collect);
         filterContactTypesLiveDate.setValue(filterContactTypesUi);
