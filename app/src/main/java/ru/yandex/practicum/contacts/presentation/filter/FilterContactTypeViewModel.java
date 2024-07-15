@@ -14,6 +14,7 @@ import ru.yandex.practicum.contacts.model.ContactType;
 import ru.yandex.practicum.contacts.presentation.base.BaseBottomSheetViewModel;
 import ru.yandex.practicum.contacts.presentation.filter.model.FilterContactType;
 import ru.yandex.practicum.contacts.presentation.filter.model.FilterContactTypeUi;
+import ru.yandex.practicum.contacts.presentation.sort.SortTypeUI;
 import ru.yandex.practicum.contacts.utils.model.ContactTypeUtils;
 import ru.yandex.practicum.contacts.utils.model.FilterContactTypeUtils;
 
@@ -63,12 +64,22 @@ public class FilterContactTypeViewModel extends BaseBottomSheetViewModel {
     private void updateFilterContactTypes() {
         final List<FilterContactTypeUi> filterContactTypesUi = new ArrayList<>();
         final boolean allSelected = selectedFilterContactTypes.size() == ContactType.values().length;
-        filterContactTypesUi.add(new FilterContactTypeUi(FilterContactType.ALL, allSelected));
+        filterContactTypesUi.add(new FilterContactTypeUi(FilterContactType.ALL, allSelected) {
+            @Override
+            public boolean theSameAs(SortTypeUI other) {
+                return false;
+            }
+        });
         final List<FilterContactTypeUi> collect = Arrays.stream(ContactType.values())
                 .map(contactType -> new FilterContactTypeUi(
                         ContactTypeUtils.toFilterContactType(contactType),
                         selectedFilterContactTypes.contains(contactType)
-                ))
+                ) {
+                    @Override
+                    public boolean theSameAs(SortTypeUI other) {
+                        return false;
+                    }
+                })
                 .collect(Collectors.toList());
         filterContactTypesUi.addAll(collect);
         filterContactTypesLiveDate.setValue(filterContactTypesUi);

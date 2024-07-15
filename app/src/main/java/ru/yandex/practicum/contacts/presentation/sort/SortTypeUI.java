@@ -1,11 +1,8 @@
 package ru.yandex.practicum.contacts.presentation.sort;
 
 import androidx.annotation.NonNull;
-
-import ru.yandex.practicum.contacts.presentation.filter.model.FilterContactTypeUi;
 import ru.yandex.practicum.contacts.presentation.base.ListDiffInterface;
 import ru.yandex.practicum.contacts.presentation.sort.model.SortType;
-import ru.yandex.practicum.contacts.presentation.base.ListDiffInterface;
 
 public class SortTypeUI implements  ListDiffInterface<SortTypeUI> {
 
